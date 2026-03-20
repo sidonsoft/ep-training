@@ -11,7 +11,7 @@
   "source_reference": "AEPM A330 Section 6.2.9.2",
   "context": {
     "phase": "cruise",
-    "altitude": "FL370",
+    "altitude": "37,000 feet",
     "flight_duration": "4 hours remaining",
     "position": "Aft galley (Zone 4)",
     "crew_configuration": {
@@ -41,7 +41,7 @@
     "special_circumstances": []
   },
   "opening": {
-    "narrative": "You're working the aft galley of an A330 during a lunch service to London. It's a smooth flight at FL370 with about 4 hours remaining. You've just loaded two meal trays into the aft oven and are preparing the service cart when you notice smoke beginning to seep from around the oven door. The distinctive smell of burning plastic and overheated electronics fills the air.",
+    "narrative": "You're working the aft galley of an A330 during a lunch service to London. It's a smooth flight at cruising altitude with about 4 hours remaining. You've just loaded two meal trays into the aft oven and are preparing the service cart when you notice smoke beginning to seep from around the oven door. The distinctive smell of burning plastic and overheated electronics fills the air.",
     "immediate_situation": "Smoke from oven, possible fire inside",
     "time_pressure": "Immediate action required",
     "visual_cue": "Smoke wisping from oven door seal"
@@ -137,7 +137,7 @@
     "start": {
       "id": "start",
       "type": "situation",
-      "content": "You're working the aft galley of an A330 during a lunch service to London. It's a smooth flight at FL370 with about 4 hours remaining. You've just loaded two meal trays into the aft oven and are preparing the service cart when you notice smoke beginning to seep from around the oven door. The distinctive smell of burning plastic and overheated electronics fills the air.\n\nWhat is your immediate action?",
+      "content": "You're working the aft galley of an A330 during a lunch service to London. It's a smooth flight at cruising altitude with about 4 hours remaining. You've just loaded two meal trays into the aft oven and are preparing the service cart when you notice smoke beginning to seep from around the oven door. The distinctive smell of burning plastic and overheated electronics fills the air.\n\nWhat is your immediate action?",
       "choices": [
         {
           "id": "a",
@@ -185,7 +185,7 @@
           "id": "b",
           "text": "Implement Basic Fire Drill: Get extinguisher, call for crew assistance, designate roles",
           "correct": true,
-          "feedback": "Correct. Basic Fire Drill requires minimum 3 crew: Fire Fighter (you), Communicator (junior crew), Backup (third crew member). The procedure is designed for team response.",
+          "feedback": "Correct. Basic Fire Drill requires minimum 3 crew: Fire Fighter (you), Communicator (second crew), Backup (third crew member). The procedure is designed for team response.",
           "next_node": "dp2"
         },
         {
@@ -200,7 +200,7 @@
     "dp2": {
       "id": "dp2",
       "type": "situation",
-      "content": "You've called for assistance. The junior crew member has arrived at the galley. You have a BCF extinguisher ready. Flames are visible through the oven door.\n\nWhat is the correct procedure to fight this oven fire?",
+      "content": "You've called for assistance. The second crew member has arrived at the galley. You have a BCF extinguisher ready. Flames are visible through the oven door.\n\nWhat is the correct procedure to fight this oven fire?",
       "choices": [
         {
           "id": "a",
@@ -256,7 +256,7 @@
     "dp4": {
       "id": "dp4",
       "type": "situation",
-      "content": "The Communicator (junior crew) asks you what information they should give the Flight Crew.\n\nWhat details must be communicated to the Flight Crew?",
+      "content": "The Communicator asks you what information they should give the Flight Crew.\n\nWhat details must be communicated to the Flight Crew?",
       "choices": [
         {
           "id": "a",
@@ -295,7 +295,7 @@
         },
         {
           "id": "b",
-          "text": "Document the incident, check BCF extinguisher level, report any equipment used to Purser, monitor the area for remainder of flight",
+          "text": "Document the incident, report any equipment used to Purser, monitor the area for remainder of flight",
           "correct": true,
           "feedback": "Correct. After any fire incident: document what happened, check extinguisher pressure/serviceability, report equipment status to Purser/CSM, maintain heightened awareness in the area, check oven is serviceable (or report as unserviceable).",
           "next_node": "end"
