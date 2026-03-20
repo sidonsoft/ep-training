@@ -1,0 +1,319 @@
+{
+  "id": "evac-002",
+  "title": "Ditching / Water Evacuation",
+  "category": "evacuation",
+  "type": "unplanned",
+  "aircraft": "A330-200",
+  "description": "An unplanned ditching scenario. You're at Door 2L when the aircraft makes an emergency water landing. This tests water evacuation procedures, equipment requirements, and raft management.",
+  "difficulty": "intermediate",
+  "time_limit_seconds": null,
+  "learning_objectives": [
+    "Execute ditching impact drill correctly",
+    "Understand lifejacket procedure (fit before exit, inflate at exit)",
+    "Know secondary escape procedures (Door 3 on A330-200)",
+    "Remember critical equipment: torch, beacon, megaphone",
+    "Manage passengers on slideraft/raft",
+    "Perform raft management duties after boarding"
+  ],
+  "common_mistakes": [
+    "Inflating lifejacket inside aircraft",
+    "Forgetting to take beacon when evacuating",
+    "Forgetting megaphone (critical if PA unserviceable)",
+    "Not checking outside for flooding/fire before opening door",
+    "Not establishing command on raft",
+    "Leaving beacon on permanently after activation"
+  ],
+  "references": {
+    "manual": "AEPM A330",
+    "chapter": "Ch.5 Ditching Emergencies",
+    "sections": ["5.3 Passenger Evacuation Procedures", "5.3.6 Primary Means of Escape", "11.4 Ditching Evacuation Impact Drill Details"]
+  },
+  "nodes": {
+    "start": {
+      "id": "start",
+      "type": "situation",
+      "content": "You're seated at Door 2L during cruise over the Pacific Ocean. It's night. Suddenly there's a loud bang, followed by severe turbulence. The aircraft banks hard.\n\nMoments later the PA announces: \"Attention! This is a ditching, follow your Crew Member's instructions.\"\n\nYou see water outside the windows. The aircraft is descending toward the ocean.\n\nWhat is your FIRST action?",
+      "choices": [
+        {
+          "id": "fit_lifejacket",
+          "text": "Fit your lifejacket and order passengers to do the same",
+          "correct": true,
+          "feedback": "Correct. The first action is to fit your lifejacket and order passengers to fit theirs. DO NOT inflate yet - inflation happens when exiting the aircraft.",
+          "next_node": "impact_prep"
+        },
+        {
+          "id": "stand_door",
+          "text": "Stand by your door and prepare for impact",
+          "correct": false,
+          "feedback": "Incorrect order. You must fit your lifejacket first, then stand by your door. Without a lifejacket fitted, you risk entering water unprepared.",
+          "next_node": "impact_prep"
+        },
+        {
+          "id": "brace_command",
+          "text": "Shout \"Brace! Brace!\" and have passengers assume brace position",
+          "correct": false,
+          "feedback": "The brace command comes from flight deck. Your immediate action is lifejacket. If time permits, you will assist with brace commands.",
+          "next_node": "impact_prep"
+        }
+      ]
+    },
+    "impact_prep": {
+      "id": "impact_prep",
+      "type": "situation",
+      "content": "You've fitted your lifejacket and passengers around you are doing the same. The aircraft is nearing the water.\n\nYou have approximately 30 seconds. You should already be at your door. What equipment should you prepare?",
+      "choices": [
+        {
+          "id": "torch_megaphone",
+          "text": "Ensure torch is accessible, megaphone ready if PA unserviceable",
+          "correct": true,
+          "feedback": "Correct. Torch for checking dark areas and signalling. Megaphone is critical for passenger commands if PA is not working.",
+          "next_node": "impact"
+        },
+        {
+          "id": "beacon_only",
+          "text": "Focus on beacon location only",
+          "correct": false,
+          "feedback": "Beacon is critical but you also need torch and megaphone ready. Megaphone is especially important in ditching - you'll need it on the water.",
+          "next_node": "impact"
+        },
+        {
+          "id": "no_equipment",
+          "text": "No equipment needed - focus on door",
+          "correct": false,
+          "feedback": "Incorrect. You must know where torch, megaphone, and beacon are. You will take these when you evacuate.",
+          "next_node": "impact"
+        }
+      ]
+    },
+    "impact": {
+      "id": "impact",
+      "type": "situation",
+      "content": "The aircraft hits the water. Multiple impacts. You're thrown forward but maintain your position.\n\nThe aircraft settles in the water. It's dark outside. Emergency lights are on but the cabin is dim. Passengers are screaming. Some are standing.\n\nThrough your door window, you see the slideraft has inflated but the water level is near the door sill.\n\nWhat do you do?",
+      "choices": [
+        {
+          "id": "check_then_open",
+          "text": "Check for flooding/fire/obstructions through window, then open door",
+          "correct": true,
+          "feedback": "Correct. Always check outside for hazards before opening. The door is your primary escape if conditions are safe. You see the slideraft is inflated.",
+          "next_node": "door_open"
+        },
+        {
+          "id": "open_immediately",
+          "text": "Open door immediately - time is critical",
+          "correct": false,
+          "feedback": "Too fast! You must check outside first. What if there's fire, flooding above the door, or debris? Always check before opening.",
+          "next_node": "door_open"
+        },
+        {
+          "id": "wait_orders",
+          "text": "Wait for CSM orders before opening any door",
+          "correct": false,
+          "feedback": "No. Ditching impact drill means you take action immediately. Check and open your door when safe. Do not wait.",
+          "next_node": "door_open"
+        }
+      ]
+    },
+    "door_open": {
+      "id": "door_open",
+      "type": "situation",
+      "content": "You open Door 2L. The slideraft inflates fully and rests on the water surface. Passengers are moving toward your door.\n\nYou need to manage the evacuation flow. What commands do you use?",
+      "choices": [
+        {
+          "id": "correct_commands",
+          "text": "\"Come this way! Lifejacket! Inflate when exiting! Step onto the raft!\"",
+          "correct": true,
+          "feedback": "Correct ditching commands. Key points: direct to raft, remind about lifejacket inflation at EXIT (not inside), maintain flow control.",
+          "next_node": "passenger_issues"
+        },
+        {
+          "id": "wrong_inflate",
+          "text": "\"Come this way! Inflate your lifejackets now! Step onto the raft!\"",
+          "correct": false,
+          "feedback": "CRITICAL ERROR. Lifejackets must NOT be inflated inside the aircraft. Passengers inflate when exiting. Inflating inside blocks movement and can trap people.",
+          "next_node": "passenger_issues"
+        },
+        {
+          "id": "jump_command",
+          "text": "\"Jump and swim! Jump and swim!\"",
+          "correct": false,
+          "feedback": "Incorrect. This is slideraft evacuation - passengers step onto the raft. \"Jump and swim\" is for secondary escapes or raft-only situations where no slide available.",
+          "next_node": "passenger_issues"
+        }
+      ]
+    },
+    "passenger_issues": {
+      "id": "passenger_issues",
+      "type": "situation",
+      "content": "A woman in seat 15A is panicking. She's standing at the door but refuses to leave, saying she can't swim. The line of passengers behind her is growing.\n\nWhat do you do?",
+      "choices": [
+        {
+          "id": "redirect_passenger",
+          "text": "Strike at arm, direct firmly: \"You MUST exit now. Lifejacket will keep you afloat. STEP ONTO THE RAFT.\"",
+          "correct": true,
+          "feedback": "Correct. Use physical strike at arm if necessary. Direct passengers firmly. Lifejacket provides flotation. Reassure briefly but keep flow moving.",
+          "next_node": "door_3_situation"
+        },
+        {
+          "id": "push_out",
+          "text": "Push her out the door onto the raft",
+          "correct": false,
+          "feedback": "Excessive force. Strike at arm and direct with commands. Pushing can cause injury and panic others. Physical contact is permitted but controlled.",
+          "next_node": "door_3_situation"
+        },
+        {
+          "id": "wait_assist",
+          "text": "Have another crew member assist her while you continue evacuation",
+          "correct": false,
+          "feedback": "No other crew may be available. You are responsible for your door. Maintain control and keep the flow moving. Use firm commands.",
+          "next_node": "door_3_situation"
+        }
+      ]
+    },
+    "door_3_situation": {
+      "id": "door_3_situation",
+      "type": "situation",
+      "content": "You receive a call on the interphone from the crew member at Door 3: \"Door 2 slideraft isn't usable! We need Door 3 opened as secondary!\"\n\nOn A330-200, Door 3 can be used as a secondary means of escape. What is the procedure?",
+      "choices": [
+        {
+          "id": "door_3_procedure",
+          "text": "Open door ARMED, release slide from door sill, direct passengers to pull tags, step into water, swim to nearest raft",
+          "correct": true,
+          "feedback": "Correct. Door 3 secondary escape: Open in ARMED mode, release slide from sill (no slideraft), passengers pull tags to detach, step into water and swim to raft/flotation. This is an A330-200 specific procedure.",
+          "next_node": "area_check"
+        },
+        {
+          "id": "door_3_normal",
+          "text": "Open door normally - slideraft will deploy",
+          "correct": false,
+          "feedback": "Incorrect. Door 3 on A330-200 is a secondary escape - it does NOT have a slideraft. Passengers must enter water and swim to raft.",
+          "next_node": "area_check"
+        },
+        {
+          "id": "door_3_disarm",
+          "text": "Disarm the door first, then open",
+          "correct": false,
+          "feedback": "No. Open in ARMED mode. The procedure requires the slide to detach from the sill so passengers can enter water safely.",
+          "next_node": "area_check"
+        }
+      ]
+    },
+    "area_check": {
+      "id": "area_check",
+      "type": "situation",
+      "content": "The passenger flow at Door 2L has stopped. You need to perform your area check before evacuating.\n\nWhat equipment must you take for a ditching scenario?",
+      "choices": [
+        {
+          "id": "correct_equipment",
+          "text": "Torch, beacon, megaphone - and salvage useful items (first aid kit, water, blankets)",
+          "correct": true,
+          "feedback": "Correct. Torch for signalling and checking. Beacon for rescue location. Megaphone for commands on water. Also salvage: first aid kit, water, blankets, any useful survival items.",
+          "next_node": "boarding"
+        },
+        {
+          "id": "torch_beacon",
+          "text": "Torch and beacon only",
+          "correct": false,
+          "feedback": "Missing megaphone! Megaphone is CRITICAL for water evacuation - PA won't work on the raft. You need it for passenger control on water.",
+          "next_node": "boarding"
+        },
+        {
+          "id": "beacon_only",
+          "text": "Beacon only - everything else is secondary",
+          "correct": false,
+          "feedback": "Incorrect. You need torch for dark areas and signalling. Megaphone for commands on water. Beacon for rescue. All three are essential in ditching.",
+          "next_node": "boarding"
+        }
+      ]
+    },
+    "boarding": {
+      "id": "boarding",
+      "type": "situation",
+      "content": "Your area check is complete. You've checked seats, aisles, galleys, lavatories, and crew rest. You've assisted an elderly man to the slideraft.\n\nYou're last at the door. What do you do now?",
+      "choices": [
+        {
+          "id": "board_command",
+          "text": "Board the slideraft to ensure crew member is on board, take command if senior ranked",
+          "correct": true,
+          "feedback": "Correct. You MUST board the slideraft/raft. Senior crew member on board takes command. You cannot stay at the aircraft.",
+          "next_node": "raft_duties"
+        },
+        {
+          "id": "stay_aircraft",
+          "text": "Stay at the aircraft to assist any remaining passengers",
+          "correct": false,
+          "feedback": "You've completed your area check. The aircraft may sink. Your duty now is to board the raft and assist from there.",
+          "next_node": "raft_duties"
+        },
+        {
+          "id": "wait_rescue",
+          "text": "Wait on the wing for rescue services",
+          "correct": false,
+          "feedback": "No. You must board the slideraft/raft. Staying on the aircraft or wing is dangerous. A crew member must be on each raft to manage passengers.",
+          "next_node": "raft_duties"
+        }
+      ]
+    },
+    "raft_duties": {
+      "id": "raft_duties",
+      "type": "situation",
+      "content": "You board the slideraft. There are approximately 25 passengers on board. You're the most senior crew member present.\n\nThe raft drifts away from the aircraft. It's dark. Passengers are crying and confused. One passenger asks: \"When will rescue come?\"\n\nWhat are your immediate raft management priorities? (Select correct order)",
+      "choices": [
+        {
+          "id": "correct_raft_order",
+          "text": "Establish command, distribute passengers evenly, release from aircraft, deploy sea anchor, ensure beacon deployed",
+          "correct": true,
+          "feedback": "Correct order: (1) Establish command - state name and category, require discipline (2) Distribute occupants evenly for stability (3) Release from aircraft (4) Deploy sea anchor to reduce drift (5) Ensure beacon deployed and leave ON.",
+          "next_node": "beacon_question"
+        },
+        {
+          "id": " beacon_first",
+          "text": "Deploy beacon immediately, then organize passengers",
+          "correct": false,
+          "feedback": "Order matters. You must establish command first - panicked passengers need leadership. THEN deploy beacon. Without order and distribution, the raft is unstable.",
+          "next_node": "beacon_question"
+        },
+        {
+          "id": "wait_raft",
+          "text": "Wait for passengers to calm down, then give instructions",
+          "correct": false,
+          "feedback": "No. Establish command IMMEDIATELY. A raft without clear leadership becomes chaotic and dangerous. Take charge immediately.",
+          "next_node": "beacon_question"
+        }
+      ]
+    },
+    "beacon_question": {
+      "id": "beacon_question",
+      "type": "situation",
+      "content": "A passenger says: \"Should we turn off the beacon to save battery? We might need it later.\"\n\nWhat do you tell them?",
+      "choices": [
+        {
+          "id": "beacon_on",
+          "text": "No. The beacon stays ON until rescue authorities request it be turned off.",
+          "correct": true,
+          "feedback": "Correct. Beacons are designed to transmit continuously. Once activated, leave ON. Rescue services will locate you by beacon signal. Turning off reduces your chance of rescue.",
+          "next_node": "end"
+        },
+        {
+          "id": "beacon_cycle",
+          "text": "Turn it off for now, turn on when we see rescue aircraft",
+          "correct": false,
+          "feedback": "Incorrect. Beacons should remain ON continuously. They help rescue services locate you. Do not cycle on/off.",
+          "next_node": "end"
+        },
+        {
+          "id": "beacon_short",
+          "text": "Turn off after 30 minutes, then on again every hour",
+          "correct": false,
+          "feedback": "No. This is not a radio. The beacon transmits location continuously. Leave it ON until rescue.",
+          "next_node": "end"
+        }
+      ]
+    },
+    "end": {
+      "id": "end",
+      "type": "completion",
+      "content": "## Scenario Complete: Ditching / Water Evacuation\n\n### Key Learning Points\n\n**1. Ditching Impact Drill**\n- Fit lifejacket FIRST\n- Order passengers to fit lifejackets\n- DO NOT inflate inside aircraft\n- Inflate lifejacket when exiting\n\n**2. Equipment (Critical)**\n- **Torch**: Check dark areas, signal\n- **Beacon**: Must be deployed, left ON\n- **Megaphone**: Essential for raft commands\n- **Salvage**: First aid kit, water, blankets\n\n**3. A330-200 Door 3 Secondary Escape**\n- Open door ARMED\n- Release slide from door sill\n- Passengers pull tags\n- Step into water, swim to raft\n\n**4. Raft Management Priorities**\n1. Establish command (state name, category, require discipline)\n2. Distribute occupants evenly\n3. Release raft from aircraft\n4. Deploy sea anchor\n5. Beacon ON (leave ON until rescue)\n\n**5. Common Mistakes**\n- Inflating lifejacket inside aircraft ❌\n- Forgetting megaphone ❌\n- Forgetting beacon ❌\n- Turning beacon off prematurely ❌\n- Not establishing command on raft ❌\n\n**6. Raft Survival**\n- Search for survivors (use heaving ring)\n- Erect canopy\n- Appoint lookouts\n- Ration water (infants and injured first)\n- Treat injured\n- Wait for rescue",
+      "next_node": null
+    }
+  }
+}

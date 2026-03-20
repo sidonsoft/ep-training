@@ -1,0 +1,270 @@
+{
+  "id": "evac-001",
+  "title": "Unplanned Land Evacuation",
+  "category": "evacuation",
+  "type": "unplanned",
+  "aircraft": "A330",
+  "description": "You are at Door 2L during cruise when an unusual vibration and loud bang are felt. The aircraft begins an unannounced descent. This scenario tests your response to an unplanned evacuation.",
+  "difficulty": "intermediate",
+  "time_limit_seconds": null,
+  "learning_objectives": [
+    "Recognise and respond to unplanned evacuation signals",
+    "Execute correct evacuation commands",
+    "Manage passenger behaviour during emergency",
+    "Coordinate with other crew members",
+    "Perform correct area checks before evacuating",
+    "Remember critical equipment (megaphone, torch)"
+  ],
+  "common_mistakes": [
+    "Using wrong exit without checking outside conditions",
+    "Not calling CSM or tech crew for followup",
+    "Forgetting megaphone when evacuating",
+    "Not performing area check before personal evacuation",
+    "Poor passenger control at door",
+    "Not reassessing blocked exits"
+  ],
+  "references": {
+    "manual": "AEPM A330",
+    "chapter": "Ch.4 Land Emergencies",
+    "sections": ["4.3 Passenger Evacuation Procedures", "4.7 Alert Phase", "3.10 Control of Passengers"]
+  },
+  "nodes": {
+    "start": {
+      "id": "start",
+      "type": "situation",
+      "content": "You're seated at your Door 2L position during cruise. The cabin is calm. Passengers are reading, sleeping, watching screens.\n\nSuddenly you feel a strong vibration followed by a loud bang. The aircraft banks sharply and begins descending. Passengers gasp and look around nervously.\n\nWhat do you do FIRST?",
+      "choices": [
+        {
+          "id": "stand_door",
+          "text": "Stand by your door and assess the situation",
+          "correct": true,
+          "feedback": "Correct. During an unexpected event, your first action is to go to your assigned door position and assess. Check outside conditions at your door.",
+          "next_node": "alert_phase"
+        },
+        {
+          "id": "call_csm",
+          "text": "Call the CSM on interphone to ask what's happening",
+          "correct": false,
+          "feedback": "Not yet. Flight crew are dealing with the situation. Only one communication attempt should be made, and your first duty is to secure your position. Stand by your door first.",
+          "next_node": "alert_phase"
+        },
+        {
+          "id": "shout_commands",
+          "text": "Start shouting evacuation commands to prepare passengers",
+          "correct": false,
+          "feedback": "No. Evacuation commands are only given after the Captain's evacuation order. At this point you don't know if an evacuation is required. Remain calm and stand by your door.",
+          "next_node": "alert_phase"
+        },
+        {
+          "id": "check_pa",
+          "text": "Check the PA system for announcements",
+          "correct": false,
+          "feedback": "Your first action at a door. Check outside conditions. PA announcements will come from flight deck if needed.",
+          "next_node": "alert_phase"
+        }
+      ]
+    },
+    "alert_phase": {
+      "id": "alert_phase",
+      "type": "situation",
+      "content": "You're standing at Door 2L. Through the window you see the engines are running – nothing obviously wrong outside.\n\nThe PA announces: \"Attention! All passengers remain seated and await further instructions.\"\n\nThis is the Alert Phase. Passengers are nervous and some are standing up. A woman in seat 12A starts opening an overhead locker.\n\nWhat do you do?",
+      "choices": [
+        {
+          "id": "control_passengers",
+          "text": "Use PA or loud voice: \"Remain seated! Fasten your seatbelt!\"",
+          "correct": true,
+          "feedback": "Correct. During Alert Phase, maintain control of passengers. Use PA if serviceable, or megaphone/voice if not. Passengers must remain seated until further instructions.",
+          "next_node": "passenger_challenge"
+        },
+        {
+          "id": "wait_for_captain",
+          "text": "Wait for the Captain's next instruction",
+          "correct": false,
+          "feedback": "You need to maintain control NOW. Passengers are standing and opening lockers. This is a safety issue. Control passengers while awaiting further PA.",
+          "next_node": "passenger_challenge"
+        },
+        {
+          "id": "arm_door",
+          "text": "Arm your door immediately while waiting",
+          "correct": false,
+          "feedback": "Incorrect timing. Doors remain in mode as briefed until the evacuation order. Arming prematurely during Alert Phase could cause confusion. Maintain passenger control first.",
+          "next_node": "passenger_challenge"
+        }
+      ]
+    },
+    "passenger_challenge": {
+      "id": "passenger_challenge",
+      "type": "situation",
+      "content": "Passengers are now seated with belts on. The woman at 12A has closed the locker and sat down.\n\nThrough the window, you notice the aircraft is lower and you can see fire trucks positioning on the ground.\n\nThe PA crackles: \"Attention! This is the Captain. Evacuate! Evacuate!\"\n\nWhat are your immediate actions? (Select all correct actions in order)",
+      "choices": [
+        {
+          "id": "correct_sequence",
+          "text": "Arm door, check outside, open door, ensure slide deploys, establish flow, command evacuation",
+          "correct": true,
+          "feedback": "Correct sequence. Arm door mode → Check outside for hazards → Open door → Guard while slide inflates → Establish flow → Commence commands.",
+          "next_node": "door_blocked"
+        },
+        {
+          "id": "wrong_no_check",
+          "text": "Arm door, open door immediately, start evacuation commands",
+          "correct": false,
+          "feedback": "Missing critical step: you MUST check outside before opening. What if there's fire, debris, or other hazards outside? Always check first.",
+          "next_node": "door_blocked"
+        },
+        {
+          "id": "wrong_no_arm",
+          "text": "Check outside, open door, start commands",
+          "correct": false,
+          "feedback": "Door must be armed before opening for slide deployment. Remember: Arm → Check → Open.",
+          "next_node": "door_blocked"
+        }
+      ]
+    },
+    "door_blocked": {
+      "id": "door_blocked",
+      "type": "situation",
+      "content": "You open Door 2L. The slide deploys but you see it's resting against a ground equipment vehicle – it may be usable but access is obstructed.\n\nThe slide from Door 1L is fully clear and usable.\n\nWhat do you do?",
+      "choices": [
+        {
+          "id": "block_redirect",
+          "text": "Declare \"BLOCKED DOOR 2L\", redirect passengers to Door 1L, reassess Door 2L periodically",
+          "correct": true,
+          "feedback": "Correct. An unusable door must be declared, redirected, and continually reassessed. Use clear commands: \"Come this way! Door 1L!\"",
+          "next_node": "area_check"
+        },
+        {
+          "id": "use_anyway",
+          "text": "Use the slide anyway – passengers can climb over the vehicle",
+          "correct": false,
+          "feedback": "Dangerous. Obstructed slides can cause injuries. If a door/exit is not safe, redirect passengers to usable exits. Your primary duty is passenger safety.",
+          "next_node": "area_check"
+        },
+        {
+          "id": "wait_clear",
+          "text": "Wait for ground crew to move the vehicle before using",
+          "correct": false,
+          "feedback": "No time. Direct passengers to usable exits immediately. Time is critical in evacuation. A blocked exit must be declared and redirected.",
+          "next_node": "area_check"
+        }
+      ]
+    },
+    "area_check": {
+      "id": "area_check",
+      "type": "situation",
+      "content": "You've been directing passengers to Door 1L for several minutes. The flow has stopped – no more passengers coming to your area.\n\nWhat do you do now?",
+      "choices": [
+        {
+          "id": "area_check_correct",
+          "text": "Take torch, check seats, aisles, galleys, lavatories, flight deck, crew rest areas for remaining passengers",
+          "correct": true,
+          "feedback": "Correct procedure. Perform a thorough area check: seats, aisles, between seats, galleys, lavatories, flight deck, crew rest areas. Communicate with other crew to avoid duplication.",
+          "next_node": "equipment_question"
+        },
+        {
+          "id": "evacuate_immediately",
+          "text": "Evacuate immediately through Door 1L",
+          "correct": false,
+          "feedback": "NO. You must check your area for remaining passengers before you evacuate. This includes seats, galleys, lavatories, crew rests. Never leave without checking.",
+          "next_node": "equipment_question"
+        },
+        {
+          "id": "call_csm",
+          "text": "Call CSM for instructions",
+          "correct": false,
+          "feedback": "Flight crew are dealing with the emergency. Only one communication attempt should be made during Alert Phase. At this stage, your duty is clear: check your area, then evacuate.",
+          "next_node": "equipment_question"
+        }
+      ]
+    },
+    "equipment_question": {
+      "id": "equipment_question",
+      "type": "situation",
+      "content": "Your area check is complete. You find an elderly passenger who needs assistance in row 14. After helping them to Door 1L, the cabin is empty.\n\nAs you prepare to evacuate, you remember something about equipment.\n\nWhat equipment should you take?",
+      "choices": [
+        {
+          "id": "torch_megaphone",
+          "text": "Torch and megaphone (if at your station)",
+          "correct": true,
+          "feedback": "Correct. Take torch and megaphone if located at your station. Megaphone is essential if PA is unserviceable and for ground coordination.",
+          "next_node": "ground_coordination"
+        },
+        {
+          "id": "nothing",
+          "text": "Nothing – just evacuate",
+          "correct": false,
+          "feedback": "INCORRECT. Torch is for checking dark areas and signaling. Megaphone is critical for passenger control on ground, especially if PA is unserviceable. This is a common mistake.",
+          "next_node": "ground_coordination"
+        },
+        {
+          "id": "fire_extinguisher",
+          "text": "Fire extinguisher and torch",
+          "correct": false,
+          "feedback": "Fire extinguisher isn't standard evacuation equipment (unless there's fire). Torch and megaphone are the expected items.",
+          "next_node": "ground_coordination"
+        }
+      ]
+    },
+    "ground_coordination": {
+      "id": "ground_coordination",
+      "type": "situation",
+      "content": "You evacuate through Door 1L and join the crew member on the ground.\n\nOn the ground you see passengers scattered. Some are taking photos. One is trying to retrieve luggage from the slide. An elderly woman is sitting near the wing unable to walk further.\n\nThe PA system is unserviceable. What are your priorities?",
+      "choices": [
+        {
+          "id": "correct_ground",
+          "text": "Use megaphone to direct passengers away from aircraft, assemble upwind, begin first aid, ensure no smoking",
+          "correct": true,
+          "feedback": "Correct ground priorities: (1) Direct passengers away from slides and aircraft (2) Assemble upwind (3) Treat injured (4) Strictly NO SMOKING (5) Use megaphone for commands.",
+          "next_node": "followup"
+        },
+        {
+          "id": "photo_concern",
+          "text": "Focus on stopping passengers taking photos",
+          "correct": false,
+          "feedback": "Not the priority. Passenger photos are low priority vs. moving everyone away from the aircraft, treating injured, and preventing fire hazards. Focus on safety first.",
+          "next_node": "followup"
+        },
+        {
+          "id": "check_aircraft",
+          "text": "Return to aircraft to check for remaining passengers",
+          "correct": false,
+          "feedback": "No. You've already completed your area check and evacuated. Ground duties now take priority. The aircraft may still be dangerous. Trust your area check.",
+          "next_node": "followup"
+        }
+      ]
+    },
+    "followup": {
+      "id": "followup",
+      "type": "situation",
+      "content": "Emergency services arrive. Passengers are assembled upwind. Injured passengers are receiving first aid.\n\nWho should you contact for follow-up?",
+      "choices": [
+        {
+          "id": "csm_tech_crew",
+          "text": "Contact CSM/tech crew for debriefing and follow-up",
+          "correct": true,
+          "feedback": "Correct. After evacuation, crew must report to CSM/tech crew for debriefing, headcount, and any required follow-up. This is frequently missed in training.",
+          "next_node": "end"
+        },
+        {
+          "id": "just_await",
+          "text": "Just await emergency services – no need to report",
+          "correct": false,
+          "feedback": "INCORRECT. Crew must call CSM/tech crew for follow-up. This ensures everyone is accounted for and critical information is relayed. Common mistake in training!",
+          "next_node": "end"
+        },
+        {
+          "id": "leave_site",
+          "text": "Leave to assist passengers at hotel",
+          "correct": false,
+          "feedback": "No. Stay at site and report to CSM/tech crew first. Debriefing and accountability are immediate priorities.",
+          "next_node": "end"
+        }
+      ]
+    },
+    "end": {
+      "id": "end",
+      "type": "completion",
+      "content": "## Scenario Complete: Unplanned Land Evacuation\n\n### Key Learning Points\n\n**1. Alert Phase vs Evacuation**\n- Alert PA: \"Remain seated and await further instructions\"\n- Maintain passenger control during Alert\n- Only evacuate on Captain's \"Evacuate\" command\n\n**2. Door Procedures**\n- Arm → Check outside → Open → Guard slide deployment\n- Blocked door: Declare → Redirect → Reassess\n- Never use an unsafe exit\n\n**3. Area Check**\n- Seats, aisles, between seats, galleys, lavatories, flight deck, crew rest\n- Communicate with crew to avoid duplication\n- Help incapable passengers after capable evacuates\n\n**4. Equipment**\n- Torch: For checking dark areas and signaling\n- Megaphone: For ground coordination if PA unserviceable\n- **Common mistake**: Forgetting megaphone!\n\n**5. Ground Duties**\n- Direct passengers away from aircraft\n- Assemble upwind\n- Treat injured, begin First Aid\n- NO SMOKING\n- Use megaphone for commands\n\n**6. Follow-up**\n- **Common mistake**: Not calling CSM/tech crew\n- Report for headcount and debriefing\n",
+      "next_node": null
+    }
+  }
+}
