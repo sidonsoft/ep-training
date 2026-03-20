@@ -5,9 +5,14 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Fixed
-- Fixed "[object Object]" display bug in fire-001, fire-002, and depress-001 scenarios
-  - Root cause: JSON conversion from `decision_points` format didn't properly extract string content from structured objects
-  - All 5 scenarios now display correctly and decision trees work as expected
+- Fixed "[object Object]" in Key Learning Points on completion screen
+  - Root cause: `learning_points` were objects, not strings
+  - Now properly formatted as markdown with topic, details, and references
+- Fixed "Finish & Return Home" button not working
+  - `handleNext()` required `selectedChoice` which doesn't exist on completion screen
+  - Now handles completion screen separately
+- Fixed fire-001, fire-002, depress-001 end node content
+- All 5 scenarios now work end-to-end
 
 ## [0.1.0] - 2026-03-20
 
