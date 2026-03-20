@@ -2,12 +2,13 @@
   "id": "fire-002",
   "title": "Lavatory Waste Bin Fire - A330",
   "subtitle": "Hidden Fire Response",
-  "aircraft": ["A330"],
+  "aircraft": [
+    "A330"
+  ],
   "category": "fire",
   "difficulty": 2,
   "estimated_time": "10-15 min",
   "source_reference": "AEPM A330 Section 6.2.11, 6.2.14.1",
-  
   "context": {
     "phase": "cruise",
     "altitude": "FL380",
@@ -37,264 +38,16 @@
     },
     "passengers": 238,
     "cabin_state": "calm",
-    "special_circumstances": ["Passenger queue for lavatories during meal service"]
+    "special_circumstances": [
+      "Passenger queue for lavatories during meal service"
+    ]
   },
-  
   "opening": {
     "narrative": "You're working the rear cabin of an A330 on a flight from Sydney to Singapore. Meal service has finished and passengers are queuing for the rear lavatories. A passenger exits LAV4 (rear right) and quickly walks away. You notice a faint smell of smoke and see a haze developing near the lavatory door. The lavatory smoke detector hasn't activated yet, but something feels wrong.",
     "immediate_situation": "Possible fire in rear lavatory waste bin",
     "time_pressure": "Passengers nearby, fire could spread",
     "visual_cue": "Haze near lavatory door, smell of smoke"
   },
-  
-  "decision_points": [
-    {
-      "id": "dp1",
-      "trigger": "You smell smoke and see haze near LAV4. The lavatory smoke detector hasn't activated yet, but something is wrong inside.",
-      "prompt": "What is your first action before opening the lavatory door?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Open the lavatory door to check the source",
-          "correct": false,
-          "feedback": "Incorrect. You must first FEEL the door with the back of your hand to check for heat. If there's a fire inside, the door may be hot, and opening it could cause a flashover.",
-          "consequence": "You open the door and heat/smoke rush out. The fire flares with the fresh oxygen. You've made the situation worse."
-        },
-        {
-          "id": "b",
-          "text": "Feel the lavatory door with the back of your hand to check for heat",
-          "correct": true,
-          "feedback": "Correct. Before opening any door where fire is suspected, feel it with the back of your hand. A hot door indicates fire inside. A cold door allows safe opening to investigate.",
-          "redirect_to": "dp2"
-        },
-        {
-          "id": "c",
-          "text": "Call for crew assistance and get fire equipment first",
-          "correct": false,
-          "feedback": "Not quite. While calling for assistance is important, your first immediate action at the scene is to check the door for heat. This determines your next steps.",
-          "consequence": "You've delayed assessing the fire. Time is critical in fire response."
-        },
-        {
-          "id": "d",
-          "text": "Queue passengers away from the area, then check",
-          "correct": false,
-          "feedback": "Partially correct that you should clear passengers, but your first action at the lavatory is to feel the door. This tells you if there's an active fire inside.",
-          "consequence": "Passengers moved but you haven't assessed the fire yet."
-        }
-      ],
-      "knowledge_tested": [
-        "Feel door with back of hand before opening",
-        "Heat detection in lavatory fire assessment",
-        "DOFI-awareness: assess before acting"
-      ]
-    },
-    {
-      "id": "dp2",
-      "trigger": "You feel the door with the back of your hand. The door is WARM to the touch.",
-      "prompt": "The door is warm. What do you do?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Open the door to see how bad the fire is",
-          "correct": false,
-          "feedback": "Incorrect. A warm/hot door indicates active fire inside. Opening it introduces oxygen and can cause the fire to flare dangerously.",
-          "consequence": "Fire flares with oxygen. Smoke billows into cabin. You've worsened the situation."
-        },
-        {
-          "id": "b",
-          "text": "Crack the door slightly, discharge BCF into lavatory, close door. Backup crew member enters with PBE later to verify fire out.",
-          "correct": true,
-          "feedback": "Correct. For a hot door: crack it open slightly, discharge BCF through the gap, close the door. The backup crew member (with PBE) will enter later to verify the fire is completely out.",
-          "redirect_to": "dp4"
-        },
-        {
-          "id": "c",
-          "text": "Use BCF through the waste bin flap without opening the door",
-          "correct": false,
-          "feedback": "This approach is for when you CAN safely open the door. When the door is hot, you crack it slightly rather than fully opening. However, using the flap from outside is also acceptable if you can access it.",
-          "consequence": "The approach works but isn't the primary procedure for a hot door."
-        },
-        {
-          "id": "d",
-          "text": "Seal the door closed and wait for the automatic extinguisher",
-          "correct": false,
-          "feedback": "Incorrect. While lavatories may have automatic extinguishers under the sink, you must actively fight the fire. Waiting allows it to grow.",
-          "consequence": "Fire continues inside. Automatic system may not activate or may be insufficient."
-        }
-      ],
-      "knowledge_tested": [
-        "Hot door procedure: crack, spray, close",
-        "PBE entry for verification",
-        "Active fire fighting vs waiting"
-      ]
-    },
-    {
-      "id": "dp3",
-      "trigger": "You feel the door with the back of your hand. The door is COLD. You call for crew assistance and have BCF ready.",
-      "prompt": "The door is cold. You can safely open it. What do you find and how do you proceed?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Open door, see smoke/flames from waste bin, discharge BCF through the flap. Backup enters with PBE to verify out.",
-          "correct": true,
-          "feedback": "Correct. For a cold door: open it safely, identify the fire source (waste bin), discharge BCF through the waste bin flap, close door. Backup crew with PBE enters to verify fire is out.",
-          "redirect_to": "dp4"
-        },
-        {
-          "id": "b",
-          "text": "Open door fully and spray BCF directly onto the fire",
-          "correct": false,
-          "feedback": "Incorrect. Even with a cold door, use the waste bin flap to discharge BCF. Don't pull the bin out. The bin is designed to contain fires.",
-          "consequence": "You introduce more oxygen and potentially spread the fire."
-        },
-        {
-          "id": "c",
-          "text": "Open door, notice a passenger was vaping, no actual fire",
-          "correct": true,
-          "feedback": "Very common real-world outcome. Most lavatory smoke alarms are from passengers vaping or smoking, not actual fires. In this case: document the incident, report to CSM, no fire fighting needed.",
-          "redirect_to": "dp4",
-          "note": "This is a realistic alternate outcome - scenario can branch here"
-        }
-      ],
-      "knowledge_tested": [
-        "Cold door procedure: open, assess, BCF through flap",
-        "Real-world: most alarms are vaping/smoking, not fires",
-        "PBE backup for verification"
-      ]
-    },
-    {
-      "id": "dp3",
-      "trigger": "You've applied BCF through the waste bin flap. The fire appears out, but the lavatory is smoke-filled.",
-      "prompt": "Passengers are aware something is happening. What do you do with the lavatory?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Keep the door closed, post a crew member to monitor, continue passenger service",
-          "correct": false,
-          "feedback": "Incorrect. You need to verify the fire is completely out, not just assume it. Monitoring from outside isn't sufficient.",
-          "consequence": "Fire may re-ignite inside. Passengers attempt to use lavatory."
-        },
-        {
-          "id": "b",
-          "text": "Don PBE, enter lavatory, check and soak burnt material, then lock lavatory as unserviceable",
-          "correct": true,
-          "feedback": "Correct. After fire appears out: Enter with PBE, verify fire is extinguished, soak any burnt material with water/non-alcoholic liquid, check for hidden fire spread, then secure lavatory as unserviceable.",
-          "redirect_to": "dp4"
-        },
-        {
-          "id": "c",
-          "text": "Open the door and window to ventilate the smoke",
-          "correct": false,
-          "feedback": "Incorrect. Do not open windows. Ventilate by keeping the door closed with PBE - you'll clear smoke through the existing ventilation. Opening to cabin spreads smoke.",
-          "consequence": "Smoke billows into passenger cabin. Passengers become distressed."
-        }
-      ],
-      "knowledge_tested": [
-        "Post-fire verification",
-        "PBE usage for smoke-filled area",
-        "Soak burnt material procedure"
-      ]
-    },
-    {
-      "id": "dp4",
-      "trigger": "The lavatory is cleared. Fire out, burnt material soaked and removed, lavatory locked as unserviceable. Your colleague asks what to tell the flight crew.",
-      "prompt": "What information must be communicated to Flight Crew?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Lavatory fire, now out, lavatory locked",
-          "correct": false,
-          "feedback": "Incorrect. Flight Crew need specific details to assess the situation and complete their procedures.",
-          "consequence": "Incomplete information. Flight Crew cannot properly assess or document incident."
-        },
-        {
-          "id": "b",
-          "text": "Location: Rear lavatory LAV4. Smoke observed from waste bin flap. White/grey smoke. Applied BCF through flap. Fire out. Burnt material removed and soaked. Lavatory locked unserviceable. No passengers injured. Monitoring area.",
-          "correct": true,
-          "feedback": "Correct. Provide: location, smoke/flames, intensity, color, smell if detectable, actions taken, results, passenger status, ongoing monitoring. This allows flight crew to complete their NNC (Non-Normal Checklist).",
-          "redirect_to": "dp5"
-        },
-        {
-          "id": "c",
-          "text": "Fire in lavatory waste bin, extinguished with BCF. Need maintenance check at destination.",
-          "correct": false,
-          "feedback": "Incorrect. Too brief. Maintenance needs are Flight Crew's decision. Focus on complete information first.",
-          "consequence": "Flight Crew lacks info for complete assessment."
-        }
-      ],
-      "knowledge_tested": [
-        "Communication content for fire incidents",
-        "Information Flight Crew must receive"
-      ]
-    },
-    {
-      "id": "dp5",
-      "trigger": "Incident resolved. A passenger approaches you and says they saw someone throw a cigarette butt into the waste bin before leaving the lavatory.",
-      "prompt": "What additional action is required regarding this information?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Note it in your report and thank the passenger for telling you",
-          "correct": false,
-          "feedback": "Incomplete. While reporting is correct, this is also a security/safety incident that requires immediate action.",
-          "consequence": "Safety violation goes unaddressed."
-        },
-        {
-          "id": "b",
-          "text": "Report to CSM immediately - this is a safety incident. Passenger may need to be identified. Document in incident report with passenger statement. CSM will coordinate with Flight Crew on further action.",
-          "correct": true,
-          "feedback": "Correct. This is now both a fire incident and a potential safety/security violation. The passenger who discarded the cigarette may need to be identified for regulatory reporting. Document the witness statement.",
-          "redirect_to": "dp6"
-        },
-        {
-          "id": "c",
-          "text": "Search for the passenger who did it and confront them",
-          "correct": false,
-          "feedback": "Incorrect. This could escalate into a security incident. Let the CSM and Flight Crew handle the process.",
-          "consequence": "Potential confrontation with passenger. Unprofessional response."
-        }
-      ],
-      "knowledge_tested": [
-        "Safety/security incident reporting",
-        "Passenger misconduct documentation",
-        "Chain of command"
-      ]
-    },
-    {
-      "id": "dp6",
-      "trigger": "The incident is now fully resolved. Fire out, lavatory secured, Flight Crew informed, safety incident documented.",
-      "prompt": "What ongoing actions are required for the remainder of the flight?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Return to normal duties, the incident is over",
-          "correct": false,
-          "feedback": "Incorrect. There are ongoing responsibilities after any fire.",
-          "consequence": "Missed monitoring requirements."
-        },
-        {
-          "id": "b",
-          "text": "Monitor the area for re-ignition, maintain heightened awareness, check BCF extinguisher remaining charge, update CSM if any changes",
-          "correct": true,
-          "feedback": "Correct. After any fire: Monitor for re-ignition, maintain heightened awareness in the area, check equipment status, and update CSM if anything changes. Re-ignition can occur even after a fire appears out.",
-          "completion": true
-        },
-        {
-          "id": "c",
-          "text": "Reset interphone to normal mode and document in company report only",
-          "correct": false,
-          "feedback": "Incomplete. Documentation is correct but ongoing monitoring is essential.",
-          "consequence": "Potential re-ignition goes unnoticed."
-        }
-      ],
-      "knowledge_tested": [
-        "Post-incident monitoring",
-        "Re-ignition awareness",
-        "Equipment status reporting"
-      ]
-    }
-  ],
-  
   "learning_points": [
     {
       "topic": "Lavatory Waste Bin Fire",
@@ -322,7 +75,6 @@
       "reference": "CCOM Safety/Security procedures"
     }
   ],
-  
   "knowledge_links": [
     {
       "topic": "Waste Bin Fire Extinguisher",
@@ -340,7 +92,6 @@
       "note": "Different procedures if on ground with vacant vs occupied aircraft"
     }
   ],
-  
   "assesses": [
     "Lavatory waste bin fire procedure",
     "Basic Fire Drill activation",
@@ -349,7 +100,6 @@
     "Safety/security incident identification",
     "Post-fire monitoring"
   ],
-  
   "common_mistakes": [
     {
       "mistake": "Opening lavatory door fully",
@@ -377,7 +127,6 @@
       "correct_action": "Maintain heightened awareness for remainder of flight"
     }
   ],
-  
   "metadata": {
     "created": "2026-03-20",
     "version": "1.0",
@@ -385,6 +134,227 @@
     "realism_rating": 4,
     "frequency": "Lavatory fires are relatively common due to passenger smoking or disposing of hot items",
     "time_sensitivity": "Fire in enclosed space can grow quickly. Passenger queues add complexity.",
-    "additional_complexities": ["Passenger queue management", "Security/incident reporting component", "Automatic extinguisher systems"]
+    "additional_complexities": [
+      "Passenger queue management",
+      "Security/incident reporting component",
+      "Automatic extinguisher systems"
+    ]
+  },
+  "nodes": {
+    "start": {
+      "id": "start",
+      "type": "situation",
+      "content": "You're working the rear cabin of an A330 on a flight from Sydney to Singapore. Meal service has finished and passengers are queuing for the rear lavatories. A passenger exits LAV4 (rear right) and quickly walks away. You notice a faint smell of smoke and see a haze developing near the lavatory door. The lavatory smoke detector hasn't activated yet, but something feels wrong.\n\nWhat is your first action before opening the lavatory door?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Open the lavatory door to check the source",
+          "correct": false,
+          "feedback": "Incorrect. You must first FEEL the door with the back of your hand to check for heat. If there's a fire inside, the door may be hot, and opening it could cause a flashover.",
+          "next_node": "dp1"
+        },
+        {
+          "id": "b",
+          "text": "Feel the lavatory door with the back of your hand to check for heat",
+          "correct": true,
+          "feedback": "Correct. Before opening any door where fire is suspected, feel it with the back of your hand. A hot door indicates fire inside. A cold door allows safe opening to investigate.",
+          "next_node": "dp1"
+        },
+        {
+          "id": "c",
+          "text": "Call for crew assistance and get fire equipment first",
+          "correct": false,
+          "feedback": "Not quite. While calling for assistance is important, your first immediate action at the scene is to check the door for heat. This determines your next steps.",
+          "next_node": "dp1"
+        },
+        {
+          "id": "d",
+          "text": "Queue passengers away from the area, then check",
+          "correct": false,
+          "feedback": "Partially correct that you should clear passengers, but your first action at the lavatory is to feel the door. This tells you if there's an active fire inside.",
+          "next_node": "dp1"
+        }
+      ]
+    },
+    "dp1": {
+      "id": "dp1",
+      "type": "situation",
+      "content": "You feel the door with the back of your hand. The door is WARM to the touch.\n\nThe door is warm. What do you do?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Open the door to see how bad the fire is",
+          "correct": false,
+          "feedback": "Incorrect. A warm/hot door indicates active fire inside. Opening it introduces oxygen and can cause the fire to flare dangerously.",
+          "next_node": "dp2"
+        },
+        {
+          "id": "b",
+          "text": "Crack the door slightly, discharge BCF into lavatory, close door. Backup crew member enters with PBE later to verify fire out.",
+          "correct": true,
+          "feedback": "Correct. For a hot door: crack it open slightly, discharge BCF through the gap, close the door. The backup crew member (with PBE) will enter later to verify the fire is completely out.",
+          "next_node": "dp2"
+        },
+        {
+          "id": "c",
+          "text": "Use BCF through the waste bin flap without opening the door",
+          "correct": false,
+          "feedback": "This approach is for when you CAN safely open the door. When the door is hot, you crack it slightly rather than fully opening. However, using the flap from outside is also acceptable if you can access it.",
+          "next_node": "dp2"
+        },
+        {
+          "id": "d",
+          "text": "Seal the door closed and wait for the automatic extinguisher",
+          "correct": false,
+          "feedback": "Incorrect. While lavatories may have automatic extinguishers under the sink, you must actively fight the fire. Waiting allows it to grow.",
+          "next_node": "dp2"
+        }
+      ]
+    },
+    "dp2": {
+      "id": "dp2",
+      "type": "situation",
+      "content": "You feel the door with the back of your hand. The door is COLD. You call for crew assistance and have BCF ready.\n\nThe door is cold. You can safely open it. What do you find and how do you proceed?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Open door, see smoke/flames from waste bin, discharge BCF through the flap. Backup enters with PBE to verify out.",
+          "correct": true,
+          "feedback": "Correct. For a cold door: open it safely, identify the fire source (waste bin), discharge BCF through the waste bin flap, close door. Backup crew with PBE enters to verify fire is out.",
+          "next_node": "dp3"
+        },
+        {
+          "id": "b",
+          "text": "Open door fully and spray BCF directly onto the fire",
+          "correct": false,
+          "feedback": "Incorrect. Even with a cold door, use the waste bin flap to discharge BCF. Don't pull the bin out. The bin is designed to contain fires.",
+          "next_node": "dp3"
+        },
+        {
+          "id": "c",
+          "text": "Open door, notice a passenger was vaping, no actual fire",
+          "correct": true,
+          "feedback": "Very common real-world outcome. Most lavatory smoke alarms are from passengers vaping or smoking, not actual fires. In this case: document the incident, report to CSM, no fire fighting needed.",
+          "next_node": "dp3"
+        }
+      ]
+    },
+    "dp3": {
+      "id": "dp3",
+      "type": "situation",
+      "content": "You've applied BCF through the waste bin flap. The fire appears out, but the lavatory is smoke-filled.\n\nPassengers are aware something is happening. What do you do with the lavatory?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Keep the door closed, post a crew member to monitor, continue passenger service",
+          "correct": false,
+          "feedback": "Incorrect. You need to verify the fire is completely out, not just assume it. Monitoring from outside isn't sufficient.",
+          "next_node": "dp4"
+        },
+        {
+          "id": "b",
+          "text": "Don PBE, enter lavatory, check and soak burnt material, then lock lavatory as unserviceable",
+          "correct": true,
+          "feedback": "Correct. After fire appears out: Enter with PBE, verify fire is extinguished, soak any burnt material with water/non-alcoholic liquid, check for hidden fire spread, then secure lavatory as unserviceable.",
+          "next_node": "dp4"
+        },
+        {
+          "id": "c",
+          "text": "Open the door and window to ventilate the smoke",
+          "correct": false,
+          "feedback": "Incorrect. Do not open windows. Ventilate by keeping the door closed with PBE - you'll clear smoke through the existing ventilation. Opening to cabin spreads smoke.",
+          "next_node": "dp4"
+        }
+      ]
+    },
+    "dp4": {
+      "id": "dp4",
+      "type": "situation",
+      "content": "The lavatory is cleared. Fire out, burnt material soaked and removed, lavatory locked as unserviceable. Your colleague asks what to tell the flight crew.\n\nWhat information must be communicated to Flight Crew?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Lavatory fire, now out, lavatory locked",
+          "correct": false,
+          "feedback": "Incorrect. Flight Crew need specific details to assess the situation and complete their procedures.",
+          "next_node": "dp5"
+        },
+        {
+          "id": "b",
+          "text": "Location: Rear lavatory LAV4. Smoke observed from waste bin flap. White/grey smoke. Applied BCF through flap. Fire out. Burnt material removed and soaked. Lavatory locked unserviceable. No passengers injured. Monitoring area.",
+          "correct": true,
+          "feedback": "Correct. Provide: location, smoke/flames, intensity, color, smell if detectable, actions taken, results, passenger status, ongoing monitoring. This allows flight crew to complete their NNC (Non-Normal Checklist).",
+          "next_node": "dp5"
+        },
+        {
+          "id": "c",
+          "text": "Fire in lavatory waste bin, extinguished with BCF. Need maintenance check at destination.",
+          "correct": false,
+          "feedback": "Incorrect. Too brief. Maintenance needs are Flight Crew's decision. Focus on complete information first.",
+          "next_node": "dp5"
+        }
+      ]
+    },
+    "dp5": {
+      "id": "dp5",
+      "type": "situation",
+      "content": "Incident resolved. A passenger approaches you and says they saw someone throw a cigarette butt into the waste bin before leaving the lavatory.\n\nWhat additional action is required regarding this information?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Note it in your report and thank the passenger for telling you",
+          "correct": false,
+          "feedback": "Incomplete. While reporting is correct, this is also a security/safety incident that requires immediate action.",
+          "next_node": "dp6"
+        },
+        {
+          "id": "b",
+          "text": "Report to CSM immediately - this is a safety incident. Passenger may need to be identified. Document in incident report with passenger statement. CSM will coordinate with Flight Crew on further action.",
+          "correct": true,
+          "feedback": "Correct. This is now both a fire incident and a potential safety/security violation. The passenger who discarded the cigarette may need to be identified for regulatory reporting. Document the witness statement.",
+          "next_node": "dp6"
+        },
+        {
+          "id": "c",
+          "text": "Search for the passenger who did it and confront them",
+          "correct": false,
+          "feedback": "Incorrect. This could escalate into a security incident. Let the CSM and Flight Crew handle the process.",
+          "next_node": "dp6"
+        }
+      ]
+    },
+    "dp6": {
+      "id": "dp6",
+      "type": "situation",
+      "content": "The incident is now fully resolved. Fire out, lavatory secured, Flight Crew informed, safety incident documented.\n\nWhat ongoing actions are required for the remainder of the flight?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Return to normal duties, the incident is over",
+          "correct": false,
+          "feedback": "Incorrect. There are ongoing responsibilities after any fire.",
+          "next_node": "end"
+        },
+        {
+          "id": "b",
+          "text": "Monitor the area for re-ignition, maintain heightened awareness, check BCF extinguisher remaining charge, update CSM if any changes",
+          "correct": true,
+          "feedback": "Correct. After any fire: Monitor for re-ignition, maintain heightened awareness in the area, check equipment status, and update CSM if anything changes. Re-ignition can occur even after a fire appears out.",
+          "next_node": "end"
+        },
+        {
+          "id": "c",
+          "text": "Reset interphone to normal mode and document in company report only",
+          "correct": false,
+          "feedback": "Incomplete. Documentation is correct but ongoing monitoring is essential.",
+          "next_node": "end"
+        }
+      ]
+    },
+    "end": {
+      "id": "end",
+      "type": "completion",
+      "content": "## Scenario Complete\n\n- [object Object]\n- [object Object]\n- [object Object]\n- [object Object]\n- [object Object]"
+    }
   }
 }

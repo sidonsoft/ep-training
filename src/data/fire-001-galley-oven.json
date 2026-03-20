@@ -2,12 +2,13 @@
   "id": "fire-001",
   "title": "Galley Oven Fire - A330",
   "subtitle": "Meal Service Interruption",
-  "aircraft": ["A330"],
+  "aircraft": [
+    "A330"
+  ],
   "category": "fire",
   "difficulty": 2,
   "estimated_time": "8-12 min",
   "source_reference": "AEPM A330 Section 6.2.9.2",
-  
   "context": {
     "phase": "cruise",
     "altitude": "FL370",
@@ -39,219 +40,12 @@
     "cabin_state": "calm",
     "special_circumstances": []
   },
-  
   "opening": {
     "narrative": "You're working the aft galley of an A330 during a lunch service to London. It's a smooth flight at FL370 with about 4 hours remaining. You've just loaded two meal trays into the aft oven and are preparing the service cart when you notice smoke beginning to seep from around the oven door. The distinctive smell of burning plastic and overheated electronics fills the air.",
     "immediate_situation": "Smoke from oven, possible fire inside",
     "time_pressure": "Immediate action required",
     "visual_cue": "Smoke wisping from oven door seal"
   },
-  
-  "decision_points": [
-    {
-      "id": "dp1",
-      "trigger": "You see smoke coming from the oven.",
-      "prompt": "What is your immediate action?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Open the oven door to see what's burning",
-          "correct": false,
-          "feedback": "Incorrect. Opening the door will introduce oxygen and could cause the fire to flare. Keep the door closed.",
-          "consequence": "Oxygen feeds the fire. flames erupt. Smoke increases. You've made the situation worse."
-        },
-        {
-          "id": "b",
-          "text": "Switch off electrical power to the oven and keep the door closed",
-          "correct": true,
-          "feedback": "Correct. Cutting power stops the heat source. Keeping the door closed starves the fire of oxygen. This is the S-K sequence: Switch off, Keep closed.",
-          "redirect_to": "dp2"
-        },
-        {
-          "id": "c",
-          "text": "Call the Captain immediately on the interphone",
-          "correct": false,
-          "feedback": "Incorrect. Your first priority is to control the immediate threat. Call for crew assistance first, then the Flight Crew will be notified through proper channels.",
-          "consequence": "You delayed fire fighting. The smoke has intensified while you made the call."
-        },
-        {
-          "id": "d",
-          "text": "Grab the BCF extinguisher and prepare to fight the fire",
-          "correct": false,
-          "feedback": "Partially correct. While you should get an extinguisher ready, you haven't yet determined if the fire needs extinguishing. Power off and door closed may be sufficient for a minor incident. You also haven't called for crew assistance.",
-          "consequence": "You have an extinguisher but no backup crew. You've also created more work - the extinguisher isn't needed yet."
-        }
-      ],
-      "knowledge_tested": [
-        "Oven Incident procedure sequence",
-        "Power isolation before fire fighting"
-      ]
-    },
-    {
-      "id": "dp2",
-      "trigger": "You've switched off power and kept the door closed. The smoke is still visible and now you see flames through the oven door gap.",
-      "prompt": "The fire is not self-extinguishing. What now?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Open door fully and discharge BCF directly onto the flames",
-          "correct": false,
-          "feedback": "Incorrect. Opening fully introduces too much oxygen. The O-S-C-R procedure requires opening only 2-5cm.",
-          "consequence": "Fire flares. More smoke. You've extended the problem."
-        },
-        {
-          "id": "b",
-          "text": "Implement Basic Fire Drill: Get extinguisher, call for crew assistance, designate roles",
-          "correct": true,
-          "feedback": "Correct. Basic Fire Drill requires minimum 3 crew: Fire Fighter (you), Communicator (junior crew), Backup (third crew member). The procedure is designed for team response.",
-          "redirect_to": "dp3"
-        },
-        {
-          "id": "c",
-          "text": "Wait 30 seconds to see if it extinguishes itself",
-          "correct": false,
-          "feedback": "Incorrect. Active flames require immediate action. Waiting allows the fire to grow and potentially spread.",
-          "consequence": "Fire has grown. Smoke now filling galley area more significantly."
-        }
-      ],
-      "knowledge_tested": [
-        "Basic Fire Drill activation",
-        "O-S-C-R procedure for persistent fire"
-      ]
-    },
-    {
-      "id": "dp3",
-      "trigger": "You've called for assistance. The junior crew member has arrived at the galley. You have a BCF extinguisher ready. Flames are visible through the oven door.",
-      "prompt": "What is the correct procedure to fight this oven fire?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Open oven door fully, discharge BCF into oven, close door",
-          "correct": false,
-          "feedback": "Incorrect. Fully opening the door introduces excess oxygen. The O-S-C-R procedure specifies opening only 2-5cm.",
-          "consequence": "Fire flares. More smoke in cabin."
-        },
-        {
-          "id": "b",
-          "text": "Open oven door 2-5cm, spray BCF into oven, close door, wait 30 seconds, re-check",
-          "correct": true,
-          "feedback": "Correct. This is the O-S-C-R procedure: Open 2-5cm, Spray BCF/HALON, Close door, wait 30 seconds, Re-check. The limited opening controls oxygen flow while allowing extinguishant application.",
-          "redirect_to": "dp4"
-        },
-        {
-          "id": "c",
-          "text": "Discharge BCF through the oven vent without opening the door",
-          "correct": false,
-          "feedback": "Incorrect. BCF needs to reach the fire source. The vent design doesn't allow proper distribution. The door must be opened slightly.",
-          "consequence": "Ineffective application. Fire continues."
-        }
-      ],
-      "knowledge_tested": [
-        "O-S-C-R oven fire procedure (Open 2-5cm, Spray, Close, Re-check)",
-        "Oxygen control during fire fighting"
-      ]
-    },
-    {
-      "id": "dp4",
-      "trigger": "After the O-S-C-R procedure, you check the oven. The fire appears out. Smoke has decreased but the oven interior is still hot to the touch.",
-      "prompt": "The fire seems extinguished. What are your next actions?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Report to Flight Crew that incident is resolved, resume service",
-          "correct": false,
-          "feedback": "Incorrect. The fire must be confirmed fully out, and burnt material must be cooled. The Captain must be informed with full details, not just 'resolved'.",
-          "consequence": "Potential re-ignition. Incident not properly documented."
-        },
-        {
-          "id": "b",
-          "text": "Soak any burnt material with water, monitor for re-ignition, have Communicator provide full details to Flight Crew",
-          "correct": true,
-          "feedback": "Correct. After fire is out: soak burnt material (use water from galley), monitor for re-ignition, and maintain communication with Flight Crew with full details: location, smoke/flames observed, intensity, color of smoke, actions taken, results.",
-          "redirect_to": "dp5"
-        },
-        {
-          "id": "c",
-          "text": "Leave oven closed with power off, return to passenger service",
-          "correct": false,
-          "feedback": "Incorrect. Burnt material remains hot and can re-ignite. You must soak it and monitor.",
-          "consequence": "Risk of re-ignition remains unaddressed."
-        }
-      ],
-      "knowledge_tested": [
-        "Post-fire cooling procedure",
-        "Communication requirements with Flight Crew",
-        "Re-ignition monitoring"
-      ]
-    },
-    {
-      "id": "dp5",
-      "trigger": "The Communicator (junior crew) asks you what information they should give the Flight Crew.",
-      "prompt": "What details must be communicated to the Flight Crew?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Tell them we had a small oven fire, it's out now",
-          "correct": false,
-          "feedback": "Incorrect. Flight Crew need specific information to assess the situation and complete their own checklists.",
-          "consequence": "Flight Crew lacks information for their procedures."
-        },
-        {
-          "id": "b",
-          "text": "Location (aft galley oven), flames observed, white smoke initially, now dissipated, BCF discharged, fire out, burnt material cooled, monitoring for re-ignition",
-          "correct": true,
-          "feedback": "Correct. The Communicator must provide: location, smoke/flames, intensity, color of smoke, smell, source identification (if known), actions being taken, results of actions. This allows Flight Crew to assess the situation properly.",
-          "redirect_to": "dp6"
-        },
-        {
-          "id": "c",
-          "text": "Ask the Captain what information they need",
-          "correct": false,
-          "feedback": "Incorrect. You should provide the standard information proactively. The Captain may be dealing with other aspects of the incident.",
-          "consequence": "Delayed communication. Flight Crew unable to act on incomplete information."
-        }
-      ],
-      "knowledge_tested": [
-        "Communication content for fire incidents",
-        "Information Flight Crew requires"
-      ]
-    },
-    {
-      "id": "dp6",
-      "trigger": "The incident is resolved. Fire out, burnt material removed and cooled, Flight Crew informed, cabin has returned to normal service.",
-      "prompt": "What actions are required before returning to standard duties?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Resume meal service, the incident is over",
-          "correct": false,
-          "feedback": "Incorrect. There are documentation requirements and equipment checks needed.",
-          "consequence": "Incomplete incident trail. Extinguisher not accounted for."
-        },
-        {
-          "id": "b",
-          "text": "Document the incident, check BCF extinguisher level, report any equipment used to Purser, monitor the area for remainder of flight",
-          "correct": true,
-          "feedback": "Correct. After any fire incident: document what happened, check extinguisher pressure/serviceability, report equipment status to Purser/CSM, maintain heightened awareness in the area, check oven is serviceable (or report as unserviceable).",
-          "completion": true
-        },
-        {
-          "id": "c",
-          "text": "Reset the circuit breaker for the oven and test if it works",
-          "correct": false,
-          "feedback": "Incorrect. Circuit breakers should NOT be reset after a fire incident unless directed by Flight Crew. The oven has just been involved in a fire and should be reported as unserviceable.",
-          "consequence": "Potential for another incident. Against procedure."
-        }
-      ],
-      "knowledge_tested": [
-        "Post-incident documentation",
-        "Circuit breaker procedure (do not reset after fire)",
-        "Equipment status reporting",
-        "Ongoing monitoring"
-      ]
-    }
-  ],
-  
   "learning_points": [
     {
       "topic": "Oven Fire Procedure",
@@ -279,7 +73,6 @@
       "reference": "AEPM 6.2"
     }
   ],
-  
   "knowledge_links": [
     {
       "topic": "BCF Extinguisher",
@@ -297,7 +90,6 @@
       "note": "Continuous vigilance, lavatory checks, galley waste bins monitored"
     }
   ],
-  
   "assesses": [
     "Oven fire procedure sequence (S-K-I, O-S-C-R)",
     "Basic Fire Drill activation and roles",
@@ -306,7 +98,6 @@
     "Post-fire procedures and documentation",
     "Equipment status reporting"
   ],
-  
   "common_mistakes": [
     {
       "mistake": "Opening oven door fully",
@@ -334,7 +125,6 @@
       "correct_action": "Provide: location, smoke/flames, intensity, color, smell, source, actions, results"
     }
   ],
-  
   "metadata": {
     "created": "2026-03-20",
     "version": "1.0",
@@ -342,5 +132,187 @@
     "realism_rating": 5,
     "frequency": "Oven fires are among the most common galley incidents",
     "time_sensitivity": "Immediate response critical - fire can spread quickly"
+  },
+  "nodes": {
+    "start": {
+      "id": "start",
+      "type": "situation",
+      "content": "You're working the aft galley of an A330 during a lunch service to London. It's a smooth flight at FL370 with about 4 hours remaining. You've just loaded two meal trays into the aft oven and are preparing the service cart when you notice smoke beginning to seep from around the oven door. The distinctive smell of burning plastic and overheated electronics fills the air.\n\nWhat is your immediate action?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Open the oven door to see what's burning",
+          "correct": false,
+          "feedback": "Incorrect. Opening the door will introduce oxygen and could cause the fire to flare. Keep the door closed.",
+          "next_node": "dp1"
+        },
+        {
+          "id": "b",
+          "text": "Switch off electrical power to the oven and keep the door closed",
+          "correct": true,
+          "feedback": "Correct. Cutting power stops the heat source. Keeping the door closed starves the fire of oxygen. This is the S-K sequence: Switch off, Keep closed.",
+          "next_node": "dp1"
+        },
+        {
+          "id": "c",
+          "text": "Call the Captain immediately on the interphone",
+          "correct": false,
+          "feedback": "Incorrect. Your first priority is to control the immediate threat. Call for crew assistance first, then the Flight Crew will be notified through proper channels.",
+          "next_node": "dp1"
+        },
+        {
+          "id": "d",
+          "text": "Grab the BCF extinguisher and prepare to fight the fire",
+          "correct": false,
+          "feedback": "Partially correct. While you should get an extinguisher ready, you haven't yet determined if the fire needs extinguishing. Power off and door closed may be sufficient for a minor incident. You also haven't called for crew assistance.",
+          "next_node": "dp1"
+        }
+      ]
+    },
+    "dp1": {
+      "id": "dp1",
+      "type": "situation",
+      "content": "You've switched off power and kept the door closed. The smoke is still visible and now you see flames through the oven door gap.\n\nThe fire is not self-extinguishing. What now?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Open door fully and discharge BCF directly onto the flames",
+          "correct": false,
+          "feedback": "Incorrect. Opening fully introduces too much oxygen. The O-S-C-R procedure requires opening only 2-5cm.",
+          "next_node": "dp2"
+        },
+        {
+          "id": "b",
+          "text": "Implement Basic Fire Drill: Get extinguisher, call for crew assistance, designate roles",
+          "correct": true,
+          "feedback": "Correct. Basic Fire Drill requires minimum 3 crew: Fire Fighter (you), Communicator (junior crew), Backup (third crew member). The procedure is designed for team response.",
+          "next_node": "dp2"
+        },
+        {
+          "id": "c",
+          "text": "Wait 30 seconds to see if it extinguishes itself",
+          "correct": false,
+          "feedback": "Incorrect. Active flames require immediate action. Waiting allows the fire to grow and potentially spread.",
+          "next_node": "dp2"
+        }
+      ]
+    },
+    "dp2": {
+      "id": "dp2",
+      "type": "situation",
+      "content": "You've called for assistance. The junior crew member has arrived at the galley. You have a BCF extinguisher ready. Flames are visible through the oven door.\n\nWhat is the correct procedure to fight this oven fire?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Open oven door fully, discharge BCF into oven, close door",
+          "correct": false,
+          "feedback": "Incorrect. Fully opening the door introduces excess oxygen. The O-S-C-R procedure specifies opening only 2-5cm.",
+          "next_node": "dp3"
+        },
+        {
+          "id": "b",
+          "text": "Open oven door 2-5cm, spray BCF into oven, close door, wait 30 seconds, re-check",
+          "correct": true,
+          "feedback": "Correct. This is the O-S-C-R procedure: Open 2-5cm, Spray BCF/HALON, Close door, wait 30 seconds, Re-check. The limited opening controls oxygen flow while allowing extinguishant application.",
+          "next_node": "dp3"
+        },
+        {
+          "id": "c",
+          "text": "Discharge BCF through the oven vent without opening the door",
+          "correct": false,
+          "feedback": "Incorrect. BCF needs to reach the fire source. The vent design doesn't allow proper distribution. The door must be opened slightly.",
+          "next_node": "dp3"
+        }
+      ]
+    },
+    "dp3": {
+      "id": "dp3",
+      "type": "situation",
+      "content": "After the O-S-C-R procedure, you check the oven. The fire appears out. Smoke has decreased but the oven interior is still hot to the touch.\n\nThe fire seems extinguished. What are your next actions?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Report to Flight Crew that incident is resolved, resume service",
+          "correct": false,
+          "feedback": "Incorrect. The fire must be confirmed fully out, and burnt material must be cooled. The Captain must be informed with full details, not just 'resolved'.",
+          "next_node": "dp4"
+        },
+        {
+          "id": "b",
+          "text": "Soak any burnt material with water, monitor for re-ignition, have Communicator provide full details to Flight Crew",
+          "correct": true,
+          "feedback": "Correct. After fire is out: soak burnt material (use water from galley), monitor for re-ignition, and maintain communication with Flight Crew with full details: location, smoke/flames observed, intensity, color of smoke, actions taken, results.",
+          "next_node": "dp4"
+        },
+        {
+          "id": "c",
+          "text": "Leave oven closed with power off, return to passenger service",
+          "correct": false,
+          "feedback": "Incorrect. Burnt material remains hot and can re-ignite. You must soak it and monitor.",
+          "next_node": "dp4"
+        }
+      ]
+    },
+    "dp4": {
+      "id": "dp4",
+      "type": "situation",
+      "content": "The Communicator (junior crew) asks you what information they should give the Flight Crew.\n\nWhat details must be communicated to the Flight Crew?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Tell them we had a small oven fire, it's out now",
+          "correct": false,
+          "feedback": "Incorrect. Flight Crew need specific information to assess the situation and complete their own checklists.",
+          "next_node": "dp5"
+        },
+        {
+          "id": "b",
+          "text": "Location (aft galley oven), flames observed, white smoke initially, now dissipated, BCF discharged, fire out, burnt material cooled, monitoring for re-ignition",
+          "correct": true,
+          "feedback": "Correct. The Communicator must provide: location, smoke/flames, intensity, color of smoke, smell, source identification (if known), actions being taken, results of actions. This allows Flight Crew to assess the situation properly.",
+          "next_node": "dp5"
+        },
+        {
+          "id": "c",
+          "text": "Ask the Captain what information they need",
+          "correct": false,
+          "feedback": "Incorrect. You should provide the standard information proactively. The Captain may be dealing with other aspects of the incident.",
+          "next_node": "dp5"
+        }
+      ]
+    },
+    "dp5": {
+      "id": "dp5",
+      "type": "situation",
+      "content": "The incident is resolved. Fire out, burnt material removed and cooled, Flight Crew informed, cabin has returned to normal service.\n\nWhat actions are required before returning to standard duties?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Resume meal service, the incident is over",
+          "correct": false,
+          "feedback": "Incorrect. There are documentation requirements and equipment checks needed.",
+          "next_node": "end"
+        },
+        {
+          "id": "b",
+          "text": "Document the incident, check BCF extinguisher level, report any equipment used to Purser, monitor the area for remainder of flight",
+          "correct": true,
+          "feedback": "Correct. After any fire incident: document what happened, check extinguisher pressure/serviceability, report equipment status to Purser/CSM, maintain heightened awareness in the area, check oven is serviceable (or report as unserviceable).",
+          "next_node": "end"
+        },
+        {
+          "id": "c",
+          "text": "Reset the circuit breaker for the oven and test if it works",
+          "correct": false,
+          "feedback": "Incorrect. Circuit breakers should NOT be reset after a fire incident unless directed by Flight Crew. The oven has just been involved in a fire and should be reported as unserviceable.",
+          "next_node": "end"
+        }
+      ]
+    },
+    "end": {
+      "id": "end",
+      "type": "completion",
+      "content": "## Scenario Complete\n\n- [object Object]\n- [object Object]\n- [object Object]\n- [object Object]\n- [object Object]"
+    }
   }
 }
