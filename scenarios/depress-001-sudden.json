@@ -1,0 +1,410 @@
+{
+  "id": "depress-001",
+  "title": "Sudden Depressurisation - A330",
+  "subtitle": "High Altitude Emergency",
+  "aircraft": ["A330"],
+  "category": "depressurisation",
+  "difficulty": 2,
+  "estimated_time": "8-12 min",
+  "source_reference": "AEPM A330 Section 6.4",
+  
+  "context": {
+    "phase": "cruise",
+    "altitude": "FL380",
+    "flight_duration": "7 hours remaining (Sydney to Dubai)",
+    "position": "Aft galley (Zone 4)",
+    "crew_configuration": {
+      "you": {
+        "role": "Cabin Crew",
+        "position": "Aft galley",
+        "experience": "3 years"
+      },
+      "junior": {
+        "role": "Junior Crew",
+        "position": "Mid cabin (Zone 3)",
+        "experience": "8 months"
+      },
+      "purser": {
+        "role": "CSM",
+        "position": "Forward galley (Zone 1)",
+        "experience": "12 years"
+      },
+      "flight_crew": {
+        "role": "Captain/First Officer",
+        "position": "Flight deck",
+        "status": "will make emergency descent"
+      }
+    },
+    "passengers": 267,
+    "cabin_state": "calm",
+    "time_of_useful_consciousness": "10-15 seconds at FL380",
+    "special_circumstances": ["Long-haul flight", "Night-time over ocean"]
+  },
+  
+  "opening": {
+    "narrative": "You're in the aft galley of an A330, seven hours into a Sydney to Dubai flight. The cabin is quiet, most passengers are sleeping or watching movies. It's night outside, you're over the Indian Ocean. Suddenly—you feel a sharp pain in your ears. The cabin lights flicker and illuminate to maximum brightness. A rush of air. Condensation fog fills the cabin. You hear a mechanical whirring—then: THUNK. THUNK. THUNK. Oxygen masks are dropping from the ceiling panels above every seat.",
+    "immediate_situation": "PSU oxygen masks deployed, cabin lights illuminated, suspected depressurisation",
+    "time_pressure": "CRITICAL - TUC at FL380 is 10-15 seconds",
+    "visual_cue": "Masks dropped, cabin lights bright, fog visible"
+  },
+  
+  "decision_points": [
+    {
+      "id": "dp1",
+      "trigger": "Oxygen masks have just deployed. The aircraft is at FL380. What is your IMMEDIATE action?",
+      "prompt": "You have approximately 10-15 seconds of useful consciousness at this altitude. What do you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Grab the nearest passenger and help them with their oxygen mask",
+          "correct": false,
+          "feedback": "INCORRECT. DEADLY. At FL380, you have 10-15 seconds of useful consciousness. You MUST secure your own oxygen first. Without oxygen, you will become incapacitated within seconds and unable to help anyone.",
+          "consequence": "You collapse from hypoxia after 12 seconds. You cannot help passengers. You may have caused their death by not being able to function.",
+          "critical_failure": true
+        },
+        {
+          "id": "b",
+          "text": "DOFI: Don Oxygen, Occupy seat, Fasten belt, Instruct passengers — immediately return to your crew seat",
+          "correct": true,
+          "feedback": "CORRECT. DOFI: Don Oxygen mask, Occupy nearest seat, Fasten seatbelt, Instruct passengers. At FL380, Time of Useful Consciousness (TUC) is only 10-15 seconds. You must reach your seat, don your mask, fasten your belt before you can do anything else.",
+          "redirect_to": "dp2"
+        },
+        {
+          "id": "c",
+          "text": "Make a PA announcement telling passengers to put on their masks",
+          "correct": false,
+          "feedback": "INCORRECT. DEADLY. You don't have time. TUC is 10-15 seconds. By the time you reach the PA, you may already be experiencing hypoxia symptoms. Secure your own oxygen first.",
+          "consequence": "You lose consciousness before reaching the PA handset. No announcement made. You're incapacitated.",
+          "critical_failure": true
+        },
+        {
+          "id": "d",
+          "text": "Stand still and wait for the Emergency Descent PA from flight crew",
+          "correct": false,
+          "feedback": "INCORRECT. DEADLY. You cannot stand still. You have 10-15 seconds. The flight crew is dealing with their own emergency descent. Every second standing reduces your useful consciousness.",
+          "consequence": "You collapse from hypoxia before the PA is made.",
+          "critical_failure": true
+        }
+      ],
+      "knowledge_tested": [
+        "Time of Useful Consciousness at FL380: 10-15 seconds",
+        "Self-oxygen priority before assisting others",
+        "Immediate action: return to crew seat"
+      ],
+      "critical_point": "This is a life-or-death decision. Wrong answer = failure."
+    },
+    {
+      "id": "dp2",
+      "trigger": "You've reached your crew seat and secured your oxygen mask. The aircraft is in a steep descent. The automatic PA activates: 'Oxygen masks have dropped. Pull down to activate. Place over nose and mouth. Secure with elastic band.' This repeats three times.",
+      "prompt": "You're on oxygen, secured in your seat. What do you observe, and what is your next action?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Unstrap and move to help passengers with their masks",
+          "correct": false,
+          "feedback": "INCORRECT. The aircraft is in an emergency descent at a steep nose-down attitude. You must remain secured in your seat until the Flight Crew advises it's safe to move.",
+          "consequence": "You're thrown forward during descent. Possible injury. You're no longer at your station."
+        },
+        {
+          "id": "b",
+          "text": "Remain seated with oxygen on, observe passengers around you, wait for 'Cabin Crew carry out follow up duties' PA from flight crew",
+          "correct": true,
+          "feedback": "CORRECT. You are secured and on oxygen. Observe passengers in your area. If someone nearby is struggling with their mask AND you can safely reach them, the Intermediate Level Off PA may advise crew to assist. Otherwise, remain seated until the Follow Up Duties PA.",
+          "redirect_to": "dp3"
+        },
+        {
+          "id": "c",
+          "text": "Call the flight deck on interphone to confirm they're OK",
+          "correct": false,
+          "feedback": "INCORRECT. Flight crew are executing their emergency descent checklist. Do not attempt contact. They will make PA announcements when appropriate.",
+          "consequence": "Interphone should not be used during depressurisation. Crew are occupied with descent."
+        },
+        {
+          "id": "d",
+          "text": "Check your oxygen flow is working by looking at the bag inflating",
+          "correct": false,
+          "feedback": "INCORRECT. Important knowledge point: Oxygen flows continuously even if the bag does NOT inflate. The bag reservoir does not need to inflate for oxygen to flow. Don't waste time checking the bag.",
+          "consequence": "You remove or adjust your mask unnecessarily. Risk of hypoxia."
+        }
+      ],
+      "knowledge_tested": [
+        "Remain seated during emergency descent",
+        "Bag does NOT need to inflate for oxygen flow",
+        "Wait for Follow Up Duties PA before moving"
+      ]
+    },
+    {
+      "id": "dp3",
+      "trigger": "The aircraft levelled at an intermediate altitude (around 20,000ft). The Captain makes an announcement: 'This is the Captain. It is critical that oxygen is supplied to all passengers. Ensure that your oxygen mask is fitted. Look at the passengers around you. If someone is not wearing an oxygen mask, and you can reach them safely, pull down and fit their mask now and ensure their chin is elevated. Oxygen will flow without the bag inflating. Cabin Crew must remain seated until I advise.'",
+      "prompt": "You've heard the Intermediate Level Off PA. A passenger across the aisle is not wearing their mask—they're slumped forward, appearing unconscious. You can reach them safely from your seat area.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Stay seated—passengers are responsible for themselves",
+          "correct": false,
+          "feedback": "INCORRECT. The Captain has specifically instructed crew to assist passengers who can be reached safely. Passengers may be suffering from hypoxia and unable to help themselves.",
+          "consequence": "Passenger remains without oxygen, hypoxia worsens."
+        },
+        {
+          "id": "b",
+          "text": "Secure your oxygen mask tightly, move to assist the passenger, pull down their mask, fit it over their mouth and nose, ensure chin is elevated",
+          "correct": true,
+          "feedback": "CORRECT. At 20,000ft, TUC is approximately 10 minutes, so you can assist safely if your oxygen is secure. Pull down the mask, fit it over their nose and mouth, ensure chin is elevated to open airway. Oxygen flows continuously.",
+          "redirect_to": "dp4"
+        },
+        {
+          "id": "c",
+          "text": "Remove your oxygen mask to communicate better with the passenger",
+          "correct": false,
+          "feedback": "INCORRECT. DANGEROUS. Never remove your oxygen mask. You can communicate through the mask, or use hand signals. Your oxygen supply must remain secure.",
+          "consequence": "You begin experiencing hypoxia symptoms by removing your mask."
+        },
+        {
+          "id": "d",
+          "text": "Make a PA announcement for other crew to help the passenger",
+          "correct": false,
+          "feedback": "INCORRECT. The passenger is near you. You can reach them safely. Don't delay by making announcements—act.",
+          "consequence": "Passenger remains without oxygen during the delay."
+        }
+      ],
+      "knowledge_tested": [
+        "Intermediate level off procedures",
+        "Chin elevation to open airway",
+        "Oxygen flows without bag inflating",
+        "Safe to assist at intermediate altitude (20,000ft TUC ~10 min)"
+      ]
+    },
+    {
+      "id": "dp4",
+      "trigger": "You've assisted the unconscious passenger. Their mask is fitted, chin elevated. The aircraft continues descent. You return to your seat. The Captain then announces: 'Cabin Crew carry out follow up duties.'",
+      "prompt": "Follow Up Duties PA has been made. What are your responsibilities now?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Walk through the cabin to check on all passengers",
+          "correct": false,
+          "feedback": "INCORRECT. Follow Up Duties include checking your designated area, not wandering the entire cabin. Each crew member has a specific zone of responsibility.",
+          "consequence": "You're not at your assigned position. Potential gaps in cabin coverage."
+        },
+        {
+          "id": "b",
+          "text": "Check your designated area, assist passengers with continuing oxygen needs, check for passengers showing hypoxia symptoms, report status to CSM",
+          "correct": true,
+          "feedback": "CORRECT. Follow Up Duties: Check your assigned area, ensure passengers have oxygen, identify hypoxia symptoms (cyanosis, confusion, difficulty breathing), assist those affected, communicate with CSM about cabin status.",
+          "redirect_to": "dp5"
+        },
+        {
+          "id": "c",
+          "text": "Start serving refreshments to calm passengers",
+          "correct": false,
+          "feedback": "INCORRECT. This is an emergency situation. Refreshments are not appropriate. Passengers must remain seated with oxygen until the aircraft reaches safe altitude.",
+          "consequence": "Unprofessional response during emergency."
+        },
+        {
+          "id": "d",
+          "text": "Immediately contact flight deck to get an update on situation",
+          "correct": false,
+          "feedback": "INCORRECT. Flight crew are managing the descent. Follow Up Duties include checking your area and communicating with CSM, not contacting the flight deck. The CSM will coordinate interphone communication.",
+          "consequence": "Unnecessary interphone traffic."
+        }
+      ],
+      "knowledge_tested": [
+        "Follow Up Duties procedure",
+        "Zone of responsibility",
+        "Hypoxia symptom recognition"
+      ]
+    },
+    {
+      "id": "dp5",
+      "trigger": "You've completed your cabin area check. Most passengers are OK, but you notice one passenger who seems confused and disoriented, even though they have oxygen on. Their skin has a bluish tint (cyanosis).",
+      "prompt": "This passenger appears to be suffering from hypoxia symptoms despite having oxygen. What do you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Leave them—they have oxygen and will recover as the aircraft descends",
+          "correct": false,
+          "feedback": "INCORRECT. Cyanosis and confusion indicate severe hypoxia. They may need supplemental oxygen beyond the PSU mask. Medical assistance may be required.",
+          "consequence": "Passenger's condition worsens. Medical emergency develops."
+        },
+        {
+          "id": "b",
+          "text": "Report to CSM, request portable oxygen cylinder, stay with passenger, prepare for possible medical assessment",
+          "correct": true,
+          "feedback": "CORRECT. Signs: cyanosis (bluish skin), confusion, disorientation = severe hypoxia. Action: Report to CSM, request portable oxygen if needed, stay with passenger, monitor airway. They may need medical assistance after landing.",
+          "redirect_to": "dp6"
+        },
+        {
+          "id": "c",
+          "text": "Increase their oxygen flow by adjusting the mask tighter",
+          "correct": false,
+          "feedback": "INCORRECT. PSU oxygen masks supply a fixed flow rate. Tightening doesn't increase oxygen—it can make breathing more difficult. Portable oxygen may be needed.",
+          "consequence": "Passenger becomes more distressed. Mask doesn't provide more oxygen."
+        },
+        {
+          "id": "d",
+          "text": "Ask if they have a medical condition and note it",
+          "correct": false,
+          "feedback": "INCORRECT. The passenger is confused—they may not be able to communicate properly. Assess symptoms first, then communicate with crew and passenger when they're clearer.",
+          "consequence": "Passenger unable to communicate properly due to confusion."
+        }
+      ],
+      "knowledge_tested": [
+        "Hypoxia symptom recognition",
+        "Cyanosis as indicator",
+        "Portable oxygen availability",
+        "Medical response in depressurisation"
+      ]
+    },
+    {
+      "id": "dp6",
+      "trigger": "The aircraft has descended to 10,000ft. The Captain announces: 'Ladies and gentlemen, we have descended to a safe altitude. You may now remove your oxygen masks. Cabin crew, secure the cabin.' The cabin is recovering. You've reported the hypoxia passenger to the CSM who arranged for portable oxygen.",
+      "prompt": "What actions are required for the remainder of the flight?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Resume normal service, the emergency is over",
+          "correct": false,
+          "feedback": "INCORRECT. While the immediate emergency is resolved, there are ongoing duties: document the incident, monitor affected passengers, secure oxygen equipment, prepare for landing, and brief replacement crew if needed.",
+          "consequence": "Incomplete incident management."
+        },
+        {
+          "id": "b",
+          "text": "Document all incidents, continue monitoring passengers with hypoxia symptoms, prepare cabin for landing, assist CSM with incident report, brief on any continuing medical concerns",
+          "correct": true,
+          "feedback": "CORRECT. Post-incident actions: Document everything that happened, continue monitoring affected passengers, stow oxygen equipment, prepare for landing, complete incident report, brief ground/medical crew at destination if needed.",
+          "completion": true
+        },
+        {
+          "id": "c",
+          "text": "Retain oxygen masks deployed as backup for remainder of flight",
+          "correct": false,
+          "feedback": "INCORRECT. At 10,000ft, cabin altitude is safe. Masks should be secured per Flight Crew instruction.",
+          "consequence": "Equipment left deployed unnecessarily."
+        }
+      ],
+      "knowledge_tested": [
+        "Post-emergency documentation",
+        "Continuing passenger monitoring",
+        "Incident reporting",
+        "Equipment stowage"
+      ]
+    }
+  ],
+  
+  "learning_points": [
+    {
+      "topic": "DOFI Acronym",
+      "critical": "D - Don Oxygen mask\nO - Occupy nearest seat\nF - Fasten seatbelt\nI - Instruct passengers",
+      "reference": "AEPM 6.4.8.2.2"
+    },
+    {
+      "topic": "Time of Useful Consciousness (TUC)",
+      "note": "Approximate values, may vary by aircraft and individual:",
+      "critical": "FL380: ~10-15 seconds | FL350: ~45 seconds | FL300: ~1 minute | FL250: ~3 minutes | FL200: ~10 minutes",
+      "reference": "AEPM 6.4.7"
+    },
+    {
+      "topic": "DOFI - Immediate Actions",
+      "sequence": "Don Oxygen, Occupy seat, Fasten belt, Instruct passengers — THIS ORDER",
+      "reference": "AEPM 6.4.8.2.2"
+    },
+    {
+      "topic": "Immediate Actions - NO PSU Masks",
+      "sequence": "Return to crew seat, contact flight crew. If no response, suspect pilot incapacitation. OBM directs crew to flight deck.",
+      "reference": "AEPM 6.4.8.2.1"
+    },
+    {
+      "topic": "Intermediate Level Off PA",
+      "action": "Captain may advise Intermediate Level Off PA if terrain requires. May instruct crew to assist passengers with masks.",
+      "reference": "AEPM 6.4.8.2.2"
+    },
+    {
+      "topic": "Oxygen Bag Myth",
+      "fact": "The bag does NOT need to inflate for oxygen to flow. Oxygen flows continuously from the chemical generator.",
+      "reference": "AEPM 6.4.8.2.2 Note"
+    },
+    {
+      "topic": "Hypoxia Symptoms",
+      "signs": "Cyanosis (bluish skin), confusion, disorientation, difficulty breathing, euphoria, impaired judgement",
+      "reference": "AEPM 6.4.13"
+    },
+    {
+      "topic": "Follow Up Duties",
+      "actions": "Check assigned area, ensure passengers have oxygen, identify hypoxia cases, report to CSM, prepare for continued descent/landing",
+      "reference": "AEPM 6.4.8.2.2"
+    }
+  ],
+  
+  "knowledge_links": [
+    {
+      "topic": "Fixed Oxygen System",
+      "reference": "AEPM Chapter 2",
+      "section": "2.12-2.13"
+    },
+    {
+      "topic": "Portable Oxygen",
+      "reference": "AEPM Chapter 2",
+      "section": "2.14-2.15"
+    },
+    {
+      "topic": "Hypoxia Training",
+      "reference": "AEPM 6.4.12-6.4.13",
+      "note": "No feeling of suffocation - brain starved of oxygen without distress"
+    }
+  ],
+  
+  "assesses": [
+    "Time of Useful Consciousness at various altitudes",
+    "Self-oxygen priority (critical, life-or-death)",
+    "Depressurisation immediate actions sequence",
+    "Intermediate level off procedure",
+    "Hypoxia symptom recognition",
+    "Follow Up Duties after emergency descent",
+    "Passenger assistance procedures",
+    "Oxygen bag mechanism (flows without bag inflation)"
+  ],
+  
+  "common_mistakes": [
+    {
+      "mistake": "Helping passengers before securing own oxygen",
+      "consequence": "Crew incapacitation within 10-15 seconds, unable to help anyone",
+      "correct_action": "ALWAYS secure own oxygen first at high altitude"
+    },
+    {
+      "mistake": "Removing mask to communicate",
+      "consequence": "Rapid hypoxia onset",
+      "correct_action": "Keep mask on, use hand signals or speak through mask"
+    },
+    {
+      "mistake": "Unstrapping during emergency descent",
+      "consequence": "Injury from steep descent attitude",
+      "correct_action": "Remain secured until level off and Follow Up Duties PA"
+    },
+    {
+      "mistake": "Thinking oxygen isn't flowing because bag didn't inflate",
+      "consequence": "Unnecessary mask adjustment, potential oxygen loss",
+      "correct_action": "Oxygen flows continuously - bag reservoir not required to inflate"
+    },
+    {
+      "mistake": "Not recognizing hypoxia symptoms",
+      "consequence": "Affected passengers not identified and assisted",
+      "correct_action": "Watch for cyanosis, confusion, disorientation - provide portable oxygen"
+    },
+    {
+      "mistake": "Contacting flight deck during depressurisation",
+      "consequence": "Unnecessary interphone traffic, flight crew occupied",
+      "correct_action": "Wait for PA from flight crew, communicate with CSM"
+    }
+  ],
+  
+  "metadata": {
+    "created": "2026-03-20",
+    "version": "1.0",
+    "aircraft_applicability": "A330",
+    "realism_rating": 5,
+    "frequency": "Depressurisation is rare but time-critical when it occurs",
+    "time_sensitivity": "EXTREMELY CRITICAL - TUC at FL380 is only 10-15 seconds",
+    "life_threatening": true,
+    "additional_notes": "This scenario MUST emphasize self-oxygen priority as a life-or-death decision"
+  }
+}
