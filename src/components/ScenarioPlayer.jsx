@@ -38,18 +38,19 @@ function ScenarioPlayer({ scenario, progress, onComplete, onBack }) {
   }
 
   const handleNext = () => {
+    // For completion screen, no need for selectedChoice
+    if (currentNode.type === 'completion') {
+      // Calculate score
+      const totalCorrect = answers.filter(a => a.correct).length
+      const score = answers.length > 0 ? Math.round((totalCorrect / answers.length) * 100) : 0
+      onComplete(scenario.id, score)
+      return
+    }
+
     if (!selectedChoice) return
 
     setShowFeedback(false)
     setSelectedChoice(null)
-
-    if (currentNode.type === 'completion') {
-      // Calculate score
-      const totalCorrect = answers.filter(a => a.correct).length
-      const score = Math.round((totalCorrect / answers.length) * 100)
-      onComplete(scenario.id, score)
-      return
-    }
 
     // Go to next node based on correct choice flow
     const nextNode = selectedChoice.next_node
